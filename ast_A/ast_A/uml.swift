@@ -32,7 +32,10 @@ extension Uml {
                 }
             }
         }
-        print(inh)
+        for (k,v) in inh {
+            print("\(k) --|> \(v)\n")
+        }
+        
     }
 }
 
