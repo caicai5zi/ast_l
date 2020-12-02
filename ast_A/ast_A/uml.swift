@@ -18,6 +18,21 @@ extension Uml {
             index[name] = model
         }
         print(index)
+        inheritancelist()
+    }
+    
+    func inheritancelist() {
+        var inh : [String:String] = [:]
+        for (n,m) in index {
+            if let cls = m.stmt as? ClassDeclaration {
+                if let clause = cls.typeInheritanceClause {
+                    for type in clause.typeInheritanceList {
+                        inh[n] = type.textDescription
+                    }
+                }
+            }
+        }
+        print(inh)
     }
 }
 
