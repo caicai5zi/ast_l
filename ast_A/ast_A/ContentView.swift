@@ -29,6 +29,10 @@ struct ContentView: View {
                         }
                     }
                 }
+                
+                Button("class") {
+                    print(uml.cls)
+                }
                 Spacer()
             }
             Spacer()
@@ -77,16 +81,16 @@ struct ContentView: View {
             let topLevelDecl = try parser.parse()
             
             for stmt in topLevelDecl.statements {
-                let m = Uml.Model(stmt: stmt, file: file)
-                uml.add(m)
+                uml.add(stmt: stmt, file: file)
+            }
+            for (n,c) in uml.cls {
+                let cls = uml.plantUml(cls: c)
+                print(cls)
             }
         }catch {
             message = error.localizedDescription
         }
     }
-    
-    
-    
 }
 
 extension ContentView {
