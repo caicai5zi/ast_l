@@ -114,6 +114,9 @@ extension Uml {
                 case let dec as VariableDeclaration:
                     body.append(plantUml(variable: dec))
                     break
+                case let dec as FunctionDeclaration:
+                    body.append(plantUml(dec))
+                    break
                 default:
                     break
                 }
@@ -129,27 +132,17 @@ extension Uml {
     }
     
     func plantUml(variable:VariableDeclaration) -> String {
-        var res = ""
         switch variable.body {
-        case .codeBlock(let ide, let type, let blk):
-            break
-        case .getterSetterBlock(let ide, let type, let blk):
-            break
-        case .initializerList(let pattern):
-            if let patt = pattern.first {
-                if let ide = patt.pattern as? IdentifierPattern {
-                    res = ide.identifier.description
-                }
-            }
-            break
-        case .getterSetterKeywordBlock(let ide, let type, let blk):
-            break
-        case .willSetDidSetBlock(let ide, let type, let exp, let blk):
-            break
+        case .codeBlock(_, <#T##TypeAnnotation#>, <#T##CodeBlock#>):
+            <#code#>
         default:
-            break
+            <#code#>
         }
-        return res
+        return variable.body.description
+    }
+    
+    func plantUml(_ fun:FunctionDeclaration) -> String {
+        return "\(fun.name)()"
     }
 
 }

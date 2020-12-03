@@ -31,7 +31,10 @@ struct ContentView: View {
                 }
                 
                 Button("class") {
-                    print(uml.cls)
+                    for (n,c) in uml.cls {
+                        let cls = uml.plantUml(cls: c)
+                        print(cls)
+                    }
                 }
                 Spacer()
             }
@@ -83,10 +86,7 @@ struct ContentView: View {
             for stmt in topLevelDecl.statements {
                 uml.add(stmt: stmt, file: file)
             }
-            for (n,c) in uml.cls {
-                let cls = uml.plantUml(cls: c)
-                print(cls)
-            }
+            
         }catch {
             message = error.localizedDescription
         }
